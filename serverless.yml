@@ -23,7 +23,7 @@ resources:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
-        TableName: ${self:provider.environment.NOTES_TABLE}
+        TableName: slsBackend
         AttributeDefinitions:
           - AttributeName: user_id
             AttributeType: S
