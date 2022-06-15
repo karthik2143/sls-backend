@@ -1,11 +1,12 @@
 
-service: sls-notes-backend
+service: 
+  name: sls-notes-backend
 
 
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   region: ap-south-1
   stage: prod
   memorySize: 128
