@@ -6,7 +6,7 @@ service: sls-notes-backend
 provider:
   name: aws
   runtime: nodejs8.10
-  region: us-west-2
+  region: ap-south-1
   stage: prod
   memorySize: 128
   timeout: 5
