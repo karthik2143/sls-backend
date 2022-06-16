@@ -1,6 +1,5 @@
 
-service: 
-  name: sls-notes-backend
+service: sls-notes-backend
 
 
 
