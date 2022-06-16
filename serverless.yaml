@@ -4,7 +4,6 @@ frameworkVersion: '3.19.0'
 provider:
   name: aws
   runtime: nodejs14.x
-  profile: serverless
   stage: prod
 
 
