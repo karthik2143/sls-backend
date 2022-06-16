@@ -1,8 +1,7 @@
-
 service: sls-notes-backend
-
-
-
+frameworkVersion: '3'
+custom:
+  tableName: 'NotesTable-${sls:stage}'
 provider:
   name: aws
   runtime: nodejs14.x
@@ -12,22 +11,17 @@ provider:
   timeout: 5
   endpointType: regional
   environment:
-    STAGE: ${self:provider.stage}
-
-
-
+    NOTES_TABLE: '${self:custom.tableName}'
 resources:
   Resources:
-    NotesTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
+    UsersTable:
+      Type: 'AWS::DynamoDB::Table'
       Properties:
-        TableName: NotesTable
         AttributeDefinitions:
           - AttributeName: user_id
             AttributeType: S
           - AttributeName: timestamp
-            AttributeType: N
+            AttributeType: 'N'
           - AttributeName: note_id
             AttributeType: S
         KeySchema:
@@ -48,4 +42,3 @@ resources:
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1
-            
