@@ -1,17 +1,30 @@
 service: usersCrud
 provider: aws
+  runtime: nodejs14.x
+  region: ap-south-1
+
 resources:
   Resources:
     usersTable:
       Type: 'AWS::DynamoDB::Table'
-      Properties: null
-      TableName: usersTable
-      AttributeDefinitions:
-        - AttributeName: email
-          AttributeType: S
-      KeySchema:
-        - AttributeName: email
-          KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
+      DeletionPolicy: Retain
+      Properties:
+        TableName: usersTable
+        AttributeDefinitions:
+          - AttributeName: user_id
+            AttributeType: S
+          - AttributeName: timestamp
+            AttributeType: N
+          - AttributeName: note_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: user_id
+            KeyType: HASH
+          - AttributeName: timestamp
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+            
+
