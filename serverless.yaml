@@ -1,36 +1,30 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Description: Hello World with SAM
-Globals:
-  Function:
-    MemorySize: 128
-    Runtime: nodejs14.x
-    Timeout: 5
-Resources:
-  Notes_Table:
-    Type: AWS::DynamoDB::Table
-    Properties:
-        AttributeDefinitions:
-          - AttributeName: user_id
-            AttributeType: S
-          - AttributeName: timestamp
-            AttributeType: 'N'
-          - AttributeName: note_id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: user_id
-            KeyType: HASH
-          - AttributeName: timestamp
-            KeyType: RANGE
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        GlobalSecondaryIndexes:
-          - IndexName: note_id-index
-            KeySchema:
-              - AttributeName: note_id
-                KeyType: HASH
-            Projection:
-              ProjectionType: ALL
-            ProvisionedThroughput:
-              ReadCapacityUnits: 1
-              WriteCapacityUnits: 1
+service: serverless
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  profile: default 
+
+
+functions:
+  getInfo:
+    handler: handler.getInfo
+    events:
+     - http:
+        path: users/info
+        method: get
+
+  createInfo:
+    handler: handlerpost.createInfo
+    events:
+     - http:
+        path: users/create
+        method: post
+
+  patchInfo:
+    handler: handlerpatch.patchInfo
+    events:
+     - http:
+        path: users/update
+        method: patch
