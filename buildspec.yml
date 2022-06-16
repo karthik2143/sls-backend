@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - echo Installing Serverless...
-      - npm install -g serverless
+      - sam init
   pre_build:
     commands:
       - echo Install source NPM dependencies...
@@ -13,7 +13,6 @@ phases:
     commands:
       - echo Deployment started on `date`
       - echo Deploying with the Serverless Framework
-      - sam init
       - sam build -t serverless.yaml
       - sam deploy
 
