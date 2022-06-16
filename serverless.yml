@@ -2,6 +2,24 @@ service: sls-notes-backend
 frameworkVersion: '3'
 custom:
   tableName: 'NotesTable-${sls:stage}'
+  allowedHeaders:
+    - Accept
+    - Content-Type
+    - Content-Length
+    - Authorization
+    - X-Amz-Date
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+    - app_user_id
+    - app_user_name
+  customDomain:
+    domainName: api.notesapp.xyz
+    basePath: 'v1'
+    stage: ${self:provider.stage}
+    certificateName: notesapp.xyz
+    createRoute53Record: true
+    
 provider:
   name: aws
   runtime: nodejs14.x
